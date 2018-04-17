@@ -121,16 +121,32 @@ function increaseInteger(int,elem){
   }
 }
 
-let elements = document.getElementsByClassName('number');
-let nums = [];
-for(let i=0; i<elements.length; i++){
-  let integer = parseInt(elements[i].id);
-  nums.push(integer);
+let triggered=false;
+function countUp(){
+  let elements = document.getElementsByClassName('number');
+  let nums = [];
+  for(let i=0; i<elements.length; i++){
+    let integer = parseInt(elements[i].id);
+    nums.push(integer);
+  }
+  nums.forEach((num)=>{
+    const target = '#'+num;
+    increaseInteger(num,$(target));
+  });
 }
-nums.forEach((num)=>{
-  const target = '#'+num;
-  increaseInteger(num,$(target));
+$(window).scroll(function() {
+   var hT = $('#scroll-to').offset().top,
+       hH = $('#scroll-to').outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();
+   if (wS > (hT+hH-wH)){
+     if(triggered===false){
+      countUp();
+      triggered=true;
+     }
+   }
 });
+
 
   // jQuery counterUp
   // $('[data-toggle="counter-up"]').counterUp({
