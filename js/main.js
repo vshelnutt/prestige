@@ -110,11 +110,33 @@ jQuery(document).ready(function( $ ) {
     }, 300);
   });
 
+function increaseInteger(int,elem){
+  const delay = 10;
+  let time = 0;
+  for(let i=0; i<=int; i++){
+    time+=delay;
+    setTimeout(()=>{
+      elem.html(i);
+    },time);
+  }
+}
+
+let elements = document.getElementsByClassName('number');
+let nums = [];
+for(let i=0; i<elements.length; i++){
+  let integer = parseInt(elements[i].id);
+  nums.push(integer);
+}
+nums.forEach((num)=>{
+  const target = '#'+num;
+  increaseInteger(num,$(target));
+});
+
   // jQuery counterUp
-  $('[data-toggle="counter-up"]').counterUp({
-    delay: 10,
-    time: 1000
-  });
+  // $('[data-toggle="counter-up"]').counterUp({
+  //   delay: 10,
+  //   time: 1000
+  // });
 
 
 //   //Google Map
