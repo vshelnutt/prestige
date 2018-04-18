@@ -110,11 +110,49 @@ jQuery(document).ready(function( $ ) {
     }, 300);
   });
 
-  // jQuery counterUp
-  $('[data-toggle="counter-up"]').counterUp({
-    delay: 10,
-    time: 1000
+function increaseInteger(int,elem){
+  const delay = 10;
+  let time = 0;
+  for(let i=0; i<=int; i++){
+    time+=delay;
+    setTimeout(()=>{
+      elem.html(i);
+    },time);
+  }
+}
+
+let triggered=false;
+function countUp(){
+  let elements = document.getElementsByClassName('number');
+  let nums = [];
+  for(let i=0; i<elements.length; i++){
+    let integer = parseInt(elements[i].id);
+    nums.push(integer);
+  }
+  nums.forEach((num)=>{
+    const target = '#'+num;
+    increaseInteger(num,$(target));
   });
+}
+$(window).scroll(function() {
+   var hT = $('#scroll-to').offset().top,
+       hH = $('#scroll-to').outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();
+   if (wS > (hT+hH-wH)){
+     if(triggered===false){
+      countUp();
+      triggered=true;
+     }
+   }
+});
+
+
+  // jQuery counterUp
+  // $('[data-toggle="counter-up"]').counterUp({
+  //   delay: 10,
+  //   time: 1000
+  // });
 
 
 //   //Google Map
